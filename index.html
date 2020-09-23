@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Minha barra de navegação padrão com bootstrap</title>
+
+    <!-- CSS: flickity, estilo css, bootstrap -->
+    <link rel="stylesheet" href="flickity/flickity.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/estilo.css">
+
+    <!-- JAVASCRIPT: flickity, jquery, script jss-->
+    <script src="flickity/flickity.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous">
+    </script>
+    <script>
+            function Clicado(link, outro, outro2) {
+                $('#link'+link).addClass('active');
+                $('#link'+outro).removeClass('active');
+                $('#link'+outro2).removeClass('active');
+                
+                switch(link) {
+                    case 1:
+                        var url = "populares.html";
+                        break;
+                    case 2:
+                        var url = "vendidos.html";
+                        break;
+                    case 3: 
+                        var url= "avaliados.html";
+                }
+
+                $.ajax({
+                    url: url,
+                    success: result => {
+                        $('#conteudo').html(result);
+                    }
+                });
+
+            };
+
+            function ClicadoFilme(link, outro, outro2) {
+                $('#filme'+link).addClass('active');
+                $('#filme'+outro).removeClass('active');
+                $('#filme'+outro2).removeClass('active');
+
+                switch(link) {
+                    case 1:
+                    var url = "filmes_populares.html";
+                    break;
+                    case 2:
+                    var url = "bilheteria.html";
+                    break;
+                    case 3:
+                    var url= "avaliados_filme.html";
+                }
+
+                $.ajax({
+                    url: url,
+                    success: result => {
+                    $('#conteudo_filme').html(result);
+                    }
+                });
+
+            }
+    </script>
+
+</head>
+
+<body>
+    
+    <nav class="navbar bg-warning navbar-expand-md justify-content-between">
+        <!--div do logo do site-->
+        <div class="navbar-brand d-flex">
+            <img src="imagens/imagem.png" alt="" class="img-fluid tamanho">
+            <h5 class="align-self-center">Jogos e Filmes</h5>
+        </div>
+
+        <!-- div que será oculta -->
+        <div id="id" class="collapse navbar-collapse justify-content-between">
+            <div></div>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a href="#lan" class="nav-link">Lançamentos</a></li>
+                <li class="nav-item"><a href="#jog" class="nav-link">Jogos</a></li>
+                <li class="nav-item"><a href="#fil" class="nav-link">Filmes</a></li>
+            </ul>
+            <a href="#rodape" id="link-social">Sobre o criador</a>
+        </div>
+        
+        <!-- botão responsivo -->
+        <button class="navbar-toggler navbar-light bg-white" data-toggle="collapse" data-target="#id">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+
+    <div class="container text-center">
+        <h2 class="mt-2" id="lan">Lançamentos</h2>
+
+        <div class="my-5">
+
+            <h4 class="cor">Jogos que chegam em 2020</h4>
+
+            <div class="carousel js-flickity" style="background-color: white;">
+                <!-- images from unsplash.com -->
+                <div class="carousel-cell">
+                    <img src="imagens/jogo-1.jpg" alt="orange tree" />
+                </div>
+                <div class="carousel-cell">
+                    <img src="imagens/jogo-2.jpg" alt="submerged" />
+                </div>
+                <div class="carousel-cell">
+                    <img src="imagens/jogo-3.png" alt="look-out" />
+                </div>
+            </div>
+
+        </div>
+
+        <div class="my-5">
+
+            <h4 class="cor">Filmes que chegam em 2020</h4>
+
+            <div class="carousel js-flickity" style="background-color: white;">
+                <!-- images from unsplash.com -->
+                <div class="carousel-cell">
+                    <img src="imagens/filme-1.jpg" alt="orange tree" />
+                </div>
+                <div class="carousel-cell">
+                    <img src="imagens/filme-2.jpg" alt="submerged" />
+                </div>
+                <div class="carousel-cell">
+                    <img src="imagens/filme-3.jpg" alt="look-out" />
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="container-fluid bg-warning mb-5" id="jog">
+
+        <!-- Título -->
+        <h2 class="text-right p-2">Tudo sobre jogos</h2>
+
+        <!-- Parágrafo com informações -->
+        <p class="text-center lead">
+            Jogos e filmes é o site mais completo sobre jogos do Brasil!
+            Todos os lançamentos, jogos melhor avaliados e mais vendidos.
+        </p>
+
+        <!-- Conteúdo e paginação -->
+        <div class="container">
+
+            <!-- div que tem a paginação -->
+            <div>
+                <ul class="pagination justify-content-center">
+                    <li class="page-item active" id="link1"> <a class="page-link" href="#jog" onclick="Clicado(1,2,3)">Jogos populares de 2020</a>
+                    </li>
+                    <li class="page-item" id="link2"> <a class="page-link" href="#jog"
+                            onclick="Clicado(2,1,3)">Mais vendidos de 2020</a>
+                    </li>
+                    <li class="page-item" id="link3"> <a class="page-link" href="#jog"
+                            onclick="Clicado(3,2,1)">Melhor avaliados de 2020</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- div que tem o conteudo -->
+            <div id="conteudo">
+                <div class="row">
+                    <div class="col-md text-center">
+                        <img src="imagens/the_last_of_us.jpg" alt="" class=" rounded tamanho2 img-fluid mt-1">
+                        <h5 class="blockquote">The Last of Us 2</h5>
+                    </div>
+                    <div class="col-md text-center">
+                        <img src="imagens/fortnite.jpg" alt="" class=" rounded tamanho2 img-fluid mt-1">
+                        <h5 class="blockquote">Fortnite</h5>
+                    </div>
+                    <div class="col-md text-center">
+                        <img src="imagens/cod.jpg" alt="" class=" rounded tamanho2 img-fluid mt-1">
+                        <h5 class="blockquote">Call of Duty Modern Warfare</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md text-center">
+                        <img src="imagens/Fall Guys.jpg" alt="" class=" rounded tamanho2 img-fluid mt-1">
+                        <h5 class="blockquote">Fall Guys</h5>
+                    </div>
+                    <div class="col-md text-center">
+                        <img src="imagens/minecraft.jpeg" alt="" class=" rounded tamanho2 img-fluid mt-1">
+                        <h5 class="blockquote">Minecraft Dungeons</h5>
+                    </div>
+                    <div class="col-md text-center">
+                        <img src="imagens/marvel.jpg" alt="" class=" rounded tamanho2 img-fluid mt-1">
+                        <h5 class="blockquote">Marvel's Avengers</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid bg-warning mb-5" id="fil">
+        <h2 class="text-right p-2">Tudo sobre filmes</h2>
+        <p class="text-center lead">
+            Jogos e filmes é o site mais completo sobre filmes do Brasil!
+            Todos os lançamentos, filmes melhor avaliados e maiores bilheterias.
+        </p>
+
+        <div class="container">
+
+            <!-- div que tem a paginação -->
+            <div>
+                <ul class="pagination justify-content-center">
+                    <li class="page-item active" id="filme1"> <a class="page-link" href="#conteudo_filme"
+                            onclick="ClicadoFilme(1,2,3)">Filmes populares de 2020</a>
+                    </li>
+                    <li class="page-item" id="filme2"> <a class="page-link" href="#conteudo_filme"
+                            onclick="ClicadoFilme(2,1,3)">Maiores bilheterias de 2020</a>
+                    </li>
+                    <li class="page-item" id="filme3"> <a class="page-link" href="#conteudo_filme" onclick="ClicadoFilme(3,2,1)">Melhor
+                            avaliados de 2020</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- div que tem o conteudo -->
+            <div id="conteudo_filme">
+                <div class="row">
+                    <div class="col-md text-center">
+                        <img src="imagens/365-Dias.jpg" alt="" class=" rounded tamanho2 img-fluid mt-1">
+                        <h5 class="blockquote">365 dias</h5>
+                    </div>
+                    <div class="col-md text-center">
+                        <img src="imagens/o poco.jpg" alt="" class=" rounded tamanho2 img-fluid mt-1">
+                        <h5 class="blockquote">O Poço</h5>
+                    </div>
+                    <div class="col-md text-center">
+                        <img src="imagens/sonic.jpg" alt="" class=" rounded tamanho2 img-fluid mt-1">
+                        <h5 class="blockquote">Sonic o Filme</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md text-center">
+                        <img src="imagens/modo-aviao.jpg" alt="" class=" rounded tamanho2 img-fluid mt-1">
+                        <h5 class="blockquote">Modo Avião</h5>
+                    </div>
+                    <div class="col-md text-center">
+                        <img src="imagens/viver-duas-vezes.jpeg" alt="" class=" rounded tamanho2 img-fluid mt-1">
+                        <h5 class="blockquote">Viver duas vezes</h5>
+                    </div>
+                    <div class="col-md text-center">
+                        <img src="imagens/a-barraca-do-beijo-2.jpg" alt="" class=" rounded tamanho2 img-fluid mt-1">
+                        <h5 class="blockquote">Barraca do Beijo 2</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-warning p-2 text-center" id="rodape">
+        <p class="bg-white rounded">
+            Essa página é fictícia e foi Criada por Vinícius Tavares da Silva em Setembro de 2020, com fins educacionais. O site foi
+            desenvolvido com HTML, CSS e Javascript, além de usar as bibliotecas do Jquery, Bootstrap e Flickity.
+        </p>
+    </div>
+
+    <!-- JAVASCRIPT: popper, bootstrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+
+</body>
+</html>
